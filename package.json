@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha './src/**/*.spec.js'",
     "start": "node src/server.js",
-    "dev":"nodemon src/server.js"
+    "dev": "nodemon src/server.js"
   },
   "keywords": [],
   "author": "",
@@ -18,5 +18,11 @@
     "express": "^4.17.1",
     "mongoose": "^5.10.1",
     "nodemon": "^2.0.4"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "faker": "^5.1.0",
+    "mocha": "^8.1.2",
+    "sinon": "^9.0.3"
   }
 }
