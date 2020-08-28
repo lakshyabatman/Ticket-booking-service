@@ -33,6 +33,9 @@ app.use('/users',userController);
 app.use('/movies',movieController)
 app.use('/movie-schedules',movieScheduleController);
 app.use('/tickets', ticketController );
+
+
+//Boostrap
 app.listen(process.env.PORT, () => {
 
   console.log(`Server is running on ${process.env.PORT}`)

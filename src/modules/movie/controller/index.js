@@ -2,6 +2,8 @@ const express = require('express');
 const movieService = require('../provider');
 const HTTPStatusCode = require('../../shared/httpcode');
 const router = express.Router();
+const cache = require('../../shared/redis')
+
 
 
 /**
@@ -10,7 +12,7 @@ const router = express.Router();
  * 
  */
 
-router.get('/:id', async (req,res) => {
+router.get('/:id',cache.route(), async (req,res) => {
     if(req.params.id == undefined) return res.status(HTTPStatusCode.BAD_REQUEST).json({
       message: 'Movie Id should be provided'
     })
@@ -24,7 +26,7 @@ router.get('/:id', async (req,res) => {
     }
 })
 
-router.get('/', async (req,res) => {
+router.get('/',cache.route(), async (req,res) => {
   try {
     let movies =  await movieService.getAll();
     return res.json({movies});
