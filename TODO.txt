@@ -1,1 +1,2 @@
-- Write repository test suite for movie repository!
+- Write repository test suite for movie , movie schedule and ticket repository !
+- Add delete cascade for tickets and movie schedules!

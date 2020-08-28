@@ -128,6 +128,127 @@
 			"protocolProfileBehavior": {}
 		},
 		{
+			"name": "Tickets",
+			"item": [
+				{
+					"name": "Get All Tickets",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/tickets",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tickets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add single ticket",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ticket\" : {\n        \"user\":\"5f49384b2671ac10fd713f5c\",\n        \"movieSchedule\":\"5f49219d1a4c1507b48fc1c7\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/tickets/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tickets",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get single ticket",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/tickets/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tickets",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5f4938522671ac10fd713f5d"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete single ticket",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/tickets/?id=5f4938522671ac10fd713f5d",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tickets",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "5f4938522671ac10fd713f5d"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete all tickets",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/users/delete-all",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"delete-all"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
 			"name": "Movies",
 			"item": [
 				{
@@ -414,7 +535,7 @@
 	],
 	"variable": [
 		{
-			"id": "b15b4176-0e61-4db8-b5e5-4d2e7bbb0987",
+			"id": "32eb03da-37e6-44c3-b93d-64177aee5806",
 			"key": "api",
 			"value": "localhost:3000"
 		}
