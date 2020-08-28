@@ -74,5 +74,26 @@ router.delete('/delete-all' ,async (req,res) => {
   }
 })
 
+router.get('/user/:id',cache.route(), async (req,res) => {
+  try {
+
+    if(req.params.id == undefined) throw new Error("Ticket id is required")
+    let user = await ticketService.getUserDetails(req.params.id);
+    return res.json({user})
+  } catch (error) {
+    return res.status(HTTPStatusCode.BAD_REQUEST).json({message: error.message})
+  }
+  
+})
+
+router.post('/get-tickets' ,async(req,res) => {
+  try {
+    if(req.body.startTime == undefined || req.body.endTime == undefined) throw new Error("Fill the range properly")
+    return await ticketService.getAllBetweenRange({...req.body});
+  }catch(err) {
+    return res.status(HTTPStatusCode.BAD_REQUEST).json({message: error.message})
+  }
+})
+
 
 module.exports = router;

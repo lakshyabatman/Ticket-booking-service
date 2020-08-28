@@ -55,6 +55,30 @@ class TicketService {
     }
   }
 
+  async updateTiming() {
+    //TODO: Check user exist;
+    //TODO Check ticket exist and booked by same suer
+    //TODO check is time slot available and seats available
+    //TODO if yes delete prev ticket and decrement tickets booked in prev schedule
+    //TODO and increment in new shcedule slot
+    //TODO return new ticket
+
+
+  }
+
+  async getAllBetweenRange(startTime, endTime) {
+    let tickets = await this.TicketRepository.getAll()
+    return tickets
+    .filter(ticket => (new Date(ticket.startTime)>= new Date(startTime) && new Date(ticket.endTime)<= new Date(endTime)))
+    .map(ticket => ticket.toObject())
+    
+  }
+
+  async getUserDetails(ticketID) {
+    return ( await ((await this.TicketRepository.getOne(ticketID)).populate('user').execPopulate())).user
+  }
+  
+
 }
 
 module.exports = new TicketService();
