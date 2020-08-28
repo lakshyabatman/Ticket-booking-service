@@ -40,7 +40,7 @@ router.get('/',cache.route(), async (req,res) => {
 router.post('',async (req,res) => {
   try {
     if(req.body.ticket == undefined) throw new Error('Body should have ticket object')
-    let ticket = await ticketService.addOne(req.body.ticket);
+    let ticket = await ticketService.addOne(req.body.ticket.user, req.body.ticket.movieSchedule);
     return res.json({ticket});
   } catch (err) {
     return res.status(HTTPStatusCode.BAD_REQUEST).json({

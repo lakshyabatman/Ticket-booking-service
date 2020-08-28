@@ -21,6 +21,15 @@ class UserRepository {
   }
 
   /**
+   * 
+   * @param {Partial<User>} userDto 
+   * @returns document of user type
+   */
+  async getUserDetails(userDto) {
+    return (await User.find({...userDto}))[0];
+  }
+
+  /**
    * @description Fetches all user
    * @returns Array of user document
    */

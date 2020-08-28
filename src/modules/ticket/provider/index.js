@@ -23,12 +23,7 @@ class TicketService {
     return tickets.map(ticket => ticket.toObject());
   }
 
-  async addOne(ticketDto) {
-    if(await this.MovieScheduleRepository.getOne(ticketDto.movieSchedule) == undefined) throw new Error("Movie Schedule not found")
-    if(await this.UserRepository.getOne(ticketDto.user) === undefined) throw new Error("User not found")
-    return await (await this.TicketRepository.addOne(ticketDto)).toObject();
-  }
-
+  
   async deleteOne(ticketID) {
     let deletedTicket = await this.TicketRepository.deleteOne(ticketID);
     if(!deletedTicket) throw new Error("Ticket doesn't exist");
@@ -37,6 +32,27 @@ class TicketService {
 
   async deleteAll() {
     return await this.TicketRepository.deleteAll();
+  }
+
+
+  async addOne(userDto, movieScheduleID) {
+    let user;
+    try {
+      user = await this.UserRepository.addOne(userDto);
+    } catch (err) {
+      user = await this.UserRepository.getUserDetails({email: userDto.email})
+    }
+
+    try {
+      let movieSchedule = await this.MovieScheduleRepository.getOne(movieScheduleID)
+      if(movieSchedule.ticketsBooked >=20) throw new Error("Movie slot is full");
+      movieSchedule.ticketsBooked++;
+      await movieSchedule.save();
+      console.log(user)
+      return await (await this.TicketRepository.addOne({movieSchedule: movieScheduleID,user: user._id})).populate("movieSchedule").populate("User").execPopulate();
+    }catch(err) {
+      throw new Error(err);
+    }
   }
 
 }

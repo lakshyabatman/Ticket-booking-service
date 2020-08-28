@@ -10,7 +10,7 @@ let movieScheduleSchema = new Schema({
   },
   ticketsBooked : {
     type: Number,
-    default: 20
+    default: 0
   },
   startTime: {
     type: String,
