@@ -1,0 +1,423 @@
+{
+	"info": {
+		"_postman_id": "e20745f9-12f0-4247-addb-dea91f2ac799",
+		"name": "Ticket booking service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get All Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/users/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add single user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\": {\n        \"name\":\"Lakshya\",\n        \"phone\":\"1234567890\",\n        \"email\":\"lakshya.khera@gmail.com\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/users/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get single user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/users/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5f48faf1072a04f45942fca1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete single user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/users/?id=5f48faf1072a04f45942fca1",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "5f48faf1072a04f45942fca1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete all users",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/users/delete-all",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users",
+								"delete-all"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Movies",
+			"item": [
+				{
+					"name": "Get All Movies",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/movies/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"movies",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add single movie",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"movie\": {\n        \"name\":\"Dark knight\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/movies/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"movies",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get single movie",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/movies/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"movies",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5f48faf1072a04f45942fca1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete single movie",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/movies/?id=5f4925e4a998870b6eb61fae",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"movies",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "5f4925e4a998870b6eb61fae"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete all movies",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/movies/delete-all",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"movies",
+								"delete-all"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Movie schedule",
+			"item": [
+				{
+					"name": "Get All Movie Schedule",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/movie-schedules/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"movie-schedules",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add single movie schedule",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"movieSchedule\": {\n        \"movie\":\"5f491eaaddd79f0670cf42ce\",\n        \"startTime\":\"123456789\",\n        \"endTime\":\"1234567890\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/movie-schedules/",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"movie-schedules",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get single movie schedule",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/movie-schedules/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"movie-schedules",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5f491cfeddad4b0608732075"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete single movie schedule",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/movie-schedules/?id=5f491cfeddad4b0608732075",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"movie-schedules",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "5f491cfeddad4b0608732075"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete all movies schedule",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/movie-schedules/delete-all",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"movie-schedules",
+								"delete-all"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Health check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/health",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "d5055630-2151-4abb-a50c-f63ee7851861",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "6feba462-e1a9-4a4c-ad36-73025cdef41d",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "b15b4176-0e61-4db8-b5e5-4d2e7bbb0987",
+			"key": "api",
+			"value": "localhost:3000"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
