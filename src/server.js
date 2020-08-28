@@ -2,7 +2,8 @@ const Express = require('express');
 const dotenv = require('dotenv').config();
 const {userController}  = require('./modules/user')
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+const { movieController } = require('./modules/movie');
 
 mongoose.connect(process.env.DB_URL, {useNewUrlParser:true,useUnifiedTopology:true}).then(() => {
   console.log("Database connected")
@@ -27,6 +28,7 @@ app.get("/health" ,(req,res) => {
 
 // Child routes
 app.use('/users',userController);
+app.use('/movies',movieController)
 
 app.listen(process.env.PORT, () => {
 
