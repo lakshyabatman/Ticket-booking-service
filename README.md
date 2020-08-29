@@ -57,3 +57,14 @@ To create a REST application for movie ticket bookings.
 
 
 
+## Initial Brainstorming 
+
+Idea was to build to scalable and module backend infrastructure which follows SOLID design patterns, also making sure database should be as normalised as possible.
+
+### Application architecture
+
+Each entity is considered as a module and build in a such way that it can wire up with other modules easily.
+
+### Database Design
+
+<img src="./readme_assets/database_design.png" height="100">
