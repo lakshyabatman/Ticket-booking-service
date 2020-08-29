@@ -11,8 +11,6 @@ const cache = require('../../shared/redis')
  * 
  */
 
-
-
 router.get('/get-tickets', cache.route() ,async (req,res) => {
   try {
     if(req.query.startTime == undefined || req.query.endTime == undefined || req.query.startTime >req.query.endTime) throw new Error("Fill the range properly")
@@ -66,9 +64,21 @@ router.delete('', async (req,res) => {
   if(req.query.id == undefined)  return res.status(HTTPStatusCode.BAD_REQUEST).json({
     message: 'Ticket Id should be provided'
   })
+  if(req.query.user == undefined)  return res.status(HTTPStatusCode.BAD_REQUEST).json({
+    message: 'User Id should be provided'
+  })
+  //Check if user owns the ticket
+  try {
+    let ticket = await ticketService.getOne(req.query.id);
+    if(ticket.user._id !=req.query.user) throw new Error("You are not authorised to delete this ticket")
+  }catch(err){
+    return res.status(HTTPStatusCode.NOT_AUTHORISED).json({
+      message: err.message
+    })
+  }
+
   try {
     let deletedTicket = await ticketService.deleteOne(req.query.id);
-    if(!deletedTicket) return res.status(HTTPStatusCode.NOT_FOUND).json({ message: 'Ticket not found'});
     return res.json({ticket: deletedTicket});
   } catch (err) {
     return res.status(HTTPStatusCode.BAD_REQUEST).json({

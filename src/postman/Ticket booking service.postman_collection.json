@@ -207,7 +207,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/tickets/?id=5f4938522671ac10fd713f5d",
+							"raw": "localhost:3000/tickets/?id=5f4a027236b39d26d881e20e&user=5f4991b52b199621190a9083",
 							"host": [
 								"localhost"
 							],
@@ -219,7 +219,11 @@
 							"query": [
 								{
 									"key": "id",
-									"value": "5f4938522671ac10fd713f5d"
+									"value": "5f4a027236b39d26d881e20e"
+								},
+								{
+									"key": "user",
+									"value": "5f4991b52b199621190a9083"
 								}
 							]
 						}
@@ -534,7 +538,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/movie-schedules/?id=5f491cfeddad4b0608732075",
+							"raw": "localhost:3000/movie-schedules/?id=5f4a023536b39d26d881e208",
 							"host": [
 								"localhost"
 							],
@@ -546,7 +550,7 @@
 							"query": [
 								{
 									"key": "id",
-									"value": "5f491cfeddad4b0608732075"
+									"value": "5f4a023536b39d26d881e208"
 								}
 							]
 						}
@@ -618,7 +622,7 @@
 	],
 	"variable": [
 		{
-			"id": "23222e65-5cdf-42a2-952d-9bd8465bcf4b",
+			"id": "32d8c8d4-0dc6-4f92-87cc-e1e5f78b18b3",
 			"key": "api",
 			"value": "localhost:3000"
 		}

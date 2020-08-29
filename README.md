@@ -8,8 +8,8 @@ To create a REST application for movie ticket bookings.
 - As a user, I can book ticket for a movie at a given time slot if available.
 - As a user, I can update booking timings if possible.
 - As a user, I can fetch user details via ticket id.
--  A a user, I can delete ticket if possible.
-- A a user, I can retrieve all tickets at a given time.
+- As a user, I can delete ticket if possible.
+- As a user, I can retrieve all tickets at a given time.
 
 ### Application side requirements
 
@@ -19,11 +19,14 @@ To create a REST application for movie ticket bookings.
 
 ## Selected tech stack
  - Backend Service : NodeJS
- - UI template: EJS
+ - Caching : Redis
  - Database: MongoDB
 
 ## Installation
-- To start server, write on your terminal `npm start`.
+- Make sure you have docker installed on your machine.
+- Run `docker-compose up ` from root directory of application to start up redis server. (Please: Don't close this terminal instance).
+- Open another terminal.
+- To start server, write on your terminal `npm start` or `npm run dev`.
 - This will run server on post `3000`.
 
 ## Database design
