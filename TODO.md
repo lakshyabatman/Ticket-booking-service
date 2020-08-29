@@ -1,4 +1,3 @@
 - [ ] Write repository test suite for movie , movie schedule and ticket repository !
 - [ ] Add delete cascade for tickets and movie schedules!
 - [ ] Add required methods and route
-- [ ] Utilise cluster instance

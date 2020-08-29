@@ -96,4 +96,14 @@ router.post('/get-tickets' ,async(req,res) => {
 })
 
 
+router.post('/update-timing', async (req,res) => {
+  try {
+    let newTicket = await ticketService.updateTiming(req.body.user,req.body.ticket,req.body.movieSchedule);
+    return res.json({ticket: newTicket})
+  }catch(err) {
+    return res.status(HTTPStatusCode.BAD_REQUEST).json({message: err.message})
+  }
+})
+
+
 module.exports = router;

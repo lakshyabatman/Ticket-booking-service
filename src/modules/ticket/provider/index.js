@@ -48,20 +48,41 @@ class TicketService {
       if(movieSchedule.ticketsBooked >=20) throw new Error("Movie slot is full");
       movieSchedule.ticketsBooked++;
       await movieSchedule.save();
-      console.log(user)
       return await (await this.TicketRepository.addOne({movieSchedule: movieScheduleID,user: user._id})).populate("movieSchedule").populate("User").execPopulate();
     }catch(err) {
       throw new Error(err);
     }
   }
 
-  async updateTiming() {
-    //TODO: Check user exist;
-    //TODO Check ticket exist and booked by same suer
-    //TODO check is time slot available and seats available
-    //TODO if yes delete prev ticket and decrement tickets booked in prev schedule
-    //TODO and increment in new shcedule slot
-    //TODO return new ticket
+  async updateTiming(userID, ticketID, newMovieScheduleID) {
+    // Check if user exist or not
+    let user = await this.UserRepository.getOne(userID);
+    if(!user) throw new Error("User doesn't exist");
+
+    // Check if provided ticker exist and created by same user
+    let ticket = await this.getOne(ticketID);
+    if(ticket== undefined  || ticket.user._id != userID) throw new Error("Invalid Ticket ID");
+
+    // Check if the provide movie slot exist and available 
+    let newMovieSchedule = await this.MovieScheduleRepository.getOne(newMovieScheduleID);
+    if(newMovieSchedule == undefined ||  newMovieSchedule.ticketsBooked>=20) throw new Error("Slot is full or invalid");
+
+    // Updated new movie slot tickets booked
+    newMovieSchedule.ticketsBooked++;
+    await newMovieSchedule.save();
+
+    // Update old movie slot tickets booked
+    let oldMovieSchedule = await this.MovieScheduleRepository.getOne(ticket.movieSchedule._id);
+    oldMovieSchedule.ticketsBooked--;
+    await oldMovieSchedule.save();
+
+    // Delete old ticket
+    await this.deleteOne(ticket._id);
+
+    // Add new Ticket with new movie slot!
+    let newTicket = await this.addOne({email: user.email},newMovieSchedule._id);
+    return newTicket;
+
 
 
   }
