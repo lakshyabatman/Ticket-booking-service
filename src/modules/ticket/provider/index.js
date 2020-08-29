@@ -90,7 +90,7 @@ class TicketService {
   async getAllBetweenRange(startTime, endTime) {
     let tickets = await this.TicketRepository.getAll()
     return tickets
-    .filter(ticket => (new Date(ticket.startTime)>= new Date(startTime) && new Date(ticket.endTime)<= new Date(endTime)))
+    .filter(ticket => new Date(ticket.movieSchedule.startTime)>= new Date(startTime) && new Date(ticket.movieSchedule.endTime)<= new Date(endTime))
     .map(ticket => ticket.toObject())
     
   }

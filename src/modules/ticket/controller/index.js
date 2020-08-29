@@ -11,18 +11,16 @@ const cache = require('../../shared/redis')
  * 
  */
 
-router.get('/:id',cache.route(), async (req,res) => {
-    if(req.params.id == undefined) return res.status(HTTPStatusCode.BAD_REQUEST).json({
-      message: 'Ticket Id should be provided'
-    })
-    try {
-      let ticket = await ticketService.getOne(req.params.id);
-      return res.json(ticket);
-    }catch(err) {
-      return res.status(HTTPStatusCode.NOT_FOUND).json({
-        message: err.message
-      })
-    }
+
+
+router.get('/get-tickets', cache.route() ,async (req,res) => {
+  try {
+    if(req.query.startTime == undefined || req.query.endTime == undefined || req.query.startTime >req.query.endTime) throw new Error("Fill the range properly")
+    let payload = await ticketService.getAllBetweenRange(req.query.startTime,req.query.endTime);
+    return res.json({tickets: payload})
+  }catch(err) {
+    return res.status(HTTPStatusCode.BAD_REQUEST).json({message: err.message})
+  }
 })
 
 router.get('/',cache.route(), async (req,res) => {
@@ -31,6 +29,20 @@ router.get('/',cache.route(), async (req,res) => {
     return res.json({tickets});
   }catch(err) {
     return res.status(HTTPStatusCode.BAD_REQUEST).json({
+      message: err.message
+    })
+  }
+})
+
+router.get('/:id',cache.route(), async (req,res) => {
+  if(req.params.id == undefined) return res.status(HTTPStatusCode.BAD_REQUEST).json({
+    message: 'Ticket Id should be provided'
+  })
+  try {
+    let ticket = await ticketService.getOne(req.params.id);
+    return res.json(ticket);
+  }catch(err) {
+    return res.status(HTTPStatusCode.NOT_FOUND).json({
       message: err.message
     })
   }
@@ -86,14 +98,7 @@ router.get('/user/:id',cache.route(), async (req,res) => {
   
 })
 
-router.post('/get-tickets' ,async(req,res) => {
-  try {
-    if(req.body.startTime == undefined || req.body.endTime == undefined) throw new Error("Fill the range properly")
-    return await ticketService.getAllBetweenRange({...req.body});
-  }catch(err) {
-    return res.status(HTTPStatusCode.BAD_REQUEST).json({message: error.message})
-  }
-})
+
 
 
 router.post('/update-timing', async (req,res) => {
