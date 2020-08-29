@@ -98,6 +98,19 @@ class TicketService {
   async getUserDetails(ticketID) {
     return ( await ((await this.TicketRepository.getOne(ticketID)).populate('user').execPopulate())).user
   }
+
+  async expireOldTickets() {
+    let currentDateTime = new Date();
+    (await this.TicketRepository.getAll()).forEach(ticket => {
+      if(new Date(currentDateTime - new Date(ticket.bookingTime)).getHours()>=8) {
+        if(ticket.isActive) {
+          ticket.isActive = false;
+          ticket.save().then(() =>  console.log(`${ticket._id} Expired`))
+        }
+
+      }
+    } )
+  }
   
 
 }

@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const { movieController } = require('./modules/movie');
 const { movieScheduleController } = require('./modules/movie-schedule');
 const { ticketController } = require('./modules/ticket');
+const cronTasks = require('./modules/shared/cron-job')
 
 mongoose.connect(process.env.DB_URL, {useNewUrlParser:true,useUnifiedTopology:true}).then(() => {
   console.log("Database connected")
@@ -19,6 +20,10 @@ const app = Express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}))
+
+
+//Cron Job
+cronTasks();
 
 
 app.get("/health" ,(req,res) => {
