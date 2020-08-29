@@ -6,12 +6,8 @@ const bodyParser = require('body-parser');
 const { movieController } = require('./modules/movie');
 const { movieScheduleController } = require('./modules/movie-schedule');
 const { ticketController } = require('./modules/ticket');
-const cronTasks = require('./modules/shared/cron-job')
-const setupWorkers = require('./modules/shared/cluster');
 const cluster = require('cluster');
-const apiLimiter = require('./modules/shared/rate-limit');
-
-
+const {apiLimiter,cronTasks,setupWorkers} = require('./modules/shared')
 const setupApp = () => {
 
   mongoose.connect(process.env.DB_URL, {useNewUrlParser:true,useUnifiedTopology:true}).then(() => {
