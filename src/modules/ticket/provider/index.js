@@ -45,10 +45,11 @@ class TicketService {
 
     try {
       let movieSchedule = await this.MovieScheduleRepository.getOne(movieScheduleID)
+      if(!movieSchedule) throw new Error("Movie slot doesn't exist");
       if(movieSchedule.ticketsBooked >=20) throw new Error("Movie slot is full");
       movieSchedule.ticketsBooked++;
       await movieSchedule.save();
-      return await (await this.TicketRepository.addOne({movieSchedule: movieScheduleID,user: user._id})).populate("movieSchedule").populate("User").execPopulate();
+      return await (await this.TicketRepository.addOne({movieSchedule: movieScheduleID,user: user.id})).populate("movieSchedule").populate("User").execPopulate();
     }catch(err) {
       throw new Error(err);
     }
@@ -68,8 +69,7 @@ class TicketService {
     if(newMovieSchedule == undefined ||  newMovieSchedule.ticketsBooked>=20) throw new Error("Slot is full or invalid");
 
     // Updated new movie slot tickets booked
-    newMovieSchedule.ticketsBooked++;
-    await newMovieSchedule.save();
+    
 
     // Update old movie slot tickets booked
     let oldMovieSchedule = await this.MovieScheduleRepository.getOne(ticket.movieSchedule._id);
@@ -96,7 +96,9 @@ class TicketService {
   }
 
   async getUserDetails(ticketID) {
-    return ( await ((await this.TicketRepository.getOne(ticketID)).populate('user').execPopulate())).user
+    let ticket = await this.TicketRepository.getOne(ticketID)
+    if(!ticket) throw new Error("Ticket doesn't exist")
+    ticket.populate('user').execPopulate().user
   }
 
   async expireOldTickets() {

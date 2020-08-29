@@ -35,6 +35,8 @@ Test suites for basic functionality are added in repository layer as it contains
 - Write `npm run test`.
 
 **For manual testing, postman collection has been added in postman folder in root directory.**
+<br/>
+**For Postman documentation, please visit <a href="https://documenter.getpostman.com/view/4450969/TVCcX9Fi" target="_blank">Here</a>.**
 
 ## Database design
 ### User

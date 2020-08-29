@@ -2,6 +2,7 @@
 	"info": {
 		"_postman_id": "e20745f9-12f0-4247-addb-dea91f2ac799",
 		"name": "Ticket booking service",
+		"description": "## Ticket booking service on NodeJS.\n### This is submitted as an assignment for Zomentum in campus hiring.\n\n**Submitted by Lakshya Khera (9917103014)**",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -23,9 +24,60 @@
 								"users",
 								""
 							]
-						}
+						},
+						"description": "This route retrieves all users documents in the collection.\nThis route uses caching middleware which caches the data in redis server."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Get All Users",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/users/",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"users",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "126"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"7e-7TQmvFntp955Ch/vPU8/ilgijm0\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 29 Aug 2020 15:20:09 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"users\": [\n        {\n            \"_id\": \"5f4a71ec6acea553ea46cb13\",\n            \"name\": \"Lakshya\",\n            \"phone\": \"1234567890\",\n            \"email\": \"lakshya.khera@gmail.com\",\n            \"__v\": 0\n        }\n    ]\n}"
+						}
+					]
 				},
 				{
 					"name": "Add single user",
@@ -34,7 +86,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"user\": {\n        \"name\":\"Lakshya\",\n        \"phone\":\"1234567890\",\n        \"email\":\"lakshya.khera@gmail.com\"\n    }\n}",
+							"raw": "{\n    \"user\": {\n        \"name\": \"Lakshya\",\n        \"phone\": \"1234567890\",\n        \"email\": \"lakshya.khera@gmail.com\"\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -51,9 +103,127 @@
 								"users",
 								""
 							]
-						}
+						},
+						"description": "This route is to add a single user document into the colelction and returns a user object with user id as well.\n\n**Request Body**\n```\nuser : {\n    name: String, // Required\n    phone : String, // Required\n    email: String // Required\n}\n```"
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Add single user",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"user\": {\n        \"name\": \"Lakshya\",\n        \"phone\": \"1234567890\",\n        \"email\": \"lakshya.khera@gmail.com\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/users/",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"users",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "123"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"7b-2BzoiR7tqLcLTtKe2UdhBq18Bs0\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 29 Aug 2020 15:19:08 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"user\": {\n        \"_id\": \"5f4a71ec6acea553ea46cb13\",\n        \"name\": \"Lakshya\",\n        \"phone\": \"1234567890\",\n        \"email\": \"lakshya.khera@gmail.com\",\n        \"__v\": 0\n    }\n}"
+						},
+						{
+							"name": "Fails if user name is not present.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"user\": {\n        \"phone\": \"1234567890\",\n        \"email\": \"lakshya.khera@gmail.com\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/users/",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"users",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "60"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3c-M40iMT0Ab2q81wpuwb2cmpy6tnA\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 29 Aug 2020 15:19:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User validation failed: name: Name is required\"\n}"
+						}
+					]
 				},
 				{
 					"name": "Get single user",
@@ -73,12 +243,124 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "5f48faf1072a04f45942fca1"
+									"value": "5f4a71ec6acea553ea46cb13"
 								}
 							]
-						}
+						},
+						"description": "Get single user document fetched using id in params, returns user document and throws error if provided id is invalid or user with the id doesn't exist."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Get single user",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/users/:id",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "5f4a71ec6acea553ea46cb13"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "114"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"72-W166a75BRLAeiC+hMYKUPiYp5Zs\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 29 Aug 2020 15:21:11 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"_id\": \"5f4a71ec6acea553ea46cb13\",\n    \"name\": \"Lakshya\",\n    \"phone\": \"1234567890\",\n    \"email\": \"lakshya.khera@gmail.com\",\n    \"__v\": 0\n}"
+						},
+						{
+							"name": "Throws error if user is not present.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/users/:id",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"users",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "5f48faf1072a04f45942fca1"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "32"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"20-HO3lXpqFBHPGGGtE0FI6mhPLXd4\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 29 Aug 2020 15:20:33 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User doesn't exist\"\n}"
+						}
+					]
 				},
 				{
 					"name": "Delete single user",
@@ -101,9 +383,121 @@
 									"value": "5f48faf1072a04f45942fca1"
 								}
 							]
-						}
+						},
+						"description": "Deleted user document according to id provided in query, returns the deleted document and throws error if provided id is invalid or user with the id doesn't exist."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Throws error if user doesn't exist.",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/users/?id=5f48faf1072a04f45942fca1",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"users",
+										""
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "5f48faf1072a04f45942fca1"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "32"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"20-HO3lXpqFBHPGGGtE0FI6mhPLXd4\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 29 Aug 2020 15:23:29 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User doesn't exist\"\n}"
+						},
+						{
+							"name": "Delete single user",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/users/?id=5f4a71ec6acea553ea46cb13",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"users",
+										""
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "5f4a71ec6acea553ea46cb13"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "123"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"7b-2BzoiR7tqLcLTtKe2UdhBq18Bs0\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 29 Aug 2020 15:23:59 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"user\": {\n        \"_id\": \"5f4a71ec6acea553ea46cb13\",\n        \"name\": \"Lakshya\",\n        \"phone\": \"1234567890\",\n        \"email\": \"lakshya.khera@gmail.com\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
 				},
 				{
 					"name": "Delete all users",
@@ -120,11 +514,63 @@
 								"users",
 								"delete-all"
 							]
-						}
+						},
+						"description": "This route deletes all user in the collection and returns an object with deletedCount as property to display number of deleted user documents."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Delete all users",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/users/delete-all",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"users",
+										"delete-all"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "18"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"12-uqqlHE4Wm7LBRtOIBZ9EyD8JjQM\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 29 Aug 2020 15:18:44 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"deletedCount\": 1\n}"
+						}
+					]
 				}
 			],
+			"description": "User is the DB entity, who can book tickets and update timings.\n\nThe following routes describe the gateway routes for this entity.",
 			"protocolProfileBehavior": {}
 		},
 		{
@@ -144,9 +590,59 @@
 							"path": [
 								"tickets"
 							]
-						}
+						},
+						"description": "Fetches all tickets from the collection."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Get All Tickets",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/tickets",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"tickets"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1085"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"43d-gGZegahIbei4U9KtDzvW4OZXc1c\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 29 Aug 2020 15:24:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"tickets\": [\n        {\n            \"isActive\": false,\n            \"bookingTime\": \"2020-08-29T07:16:25.233Z\",\n            \"_id\": \"5f4a00dc32526d2649d9ddf3\",\n            \"movieSchedule\": null,\n            \"user\": null,\n            \"__v\": 0\n        },\n        {\n            \"isActive\": false,\n            \"bookingTime\": \"2020-08-29T07:19:55.535Z\",\n            \"_id\": \"5f4a019d228bc3268d44390c\",\n            \"movieSchedule\": null,\n            \"user\": null,\n            \"__v\": 0\n        },\n        {\n            \"isActive\": false,\n            \"bookingTime\": \"2020-08-29T07:20:52.023Z\",\n            \"_id\": \"5f4a01d4dab1c026aca6c8b7\",\n            \"movieSchedule\": null,\n            \"user\": null,\n            \"__v\": 0\n        },\n        {\n            \"isActive\": false,\n            \"bookingTime\": \"2020-08-29T07:20:52.023Z\",\n            \"_id\": \"5f4a01dbdab1c026aca6c8b9\",\n            \"movieSchedule\": null,\n            \"user\": null,\n            \"__v\": 0\n        },\n        {\n            \"isActive\": false,\n            \"bookingTime\": \"2020-08-29T07:20:52.023Z\",\n            \"_id\": \"5f4a01dcdab1c026aca6c8bb\",\n            \"movieSchedule\": null,\n            \"user\": null,\n            \"__v\": 0\n        },\n        {\n            \"isActive\": false,\n            \"bookingTime\": \"2020-08-29T07:20:52.023Z\",\n            \"_id\": \"5f4a01dddab1c026aca6c8bd\",\n            \"movieSchedule\": null,\n            \"user\": null,\n            \"__v\": 0\n        },\n        {\n            \"isActive\": false,\n            \"bookingTime\": \"2020-08-29T07:20:52.023Z\",\n            \"_id\": \"5f4a01dddab1c026aca6c8bf\",\n            \"movieSchedule\": null,\n            \"user\": null,\n            \"__v\": 0\n        },\n        {\n            \"isActive\": false,\n            \"bookingTime\": \"2020-08-29T07:20:52.023Z\",\n            \"_id\": \"5f4a01dfdab1c026aca6c8c1\",\n            \"movieSchedule\": null,\n            \"user\": null,\n            \"__v\": 0\n        }\n    ]\n}"
+						}
+					]
 				},
 				{
 					"name": "Add single ticket",
@@ -172,9 +668,127 @@
 								"tickets",
 								""
 							]
-						}
+						},
+						"description": "Adds ticket to the collection corresponding to particular movie slot by user, returns ticket document with populate movie and user document and throws error if user or movie slot doesn't exist or movie slot is full."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Add single ticket",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"ticket\" : {\n        \"user\":{\n            \"name\":\"Lakshya Khera\",\n            \"phone\":\"1234567890\",\n            \"email\":\"lakshya.khera@gmail.com\"\n        },\n        \"movieSchedule\":\"5f4a7454ee6bc354831f2673\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/tickets/",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"tickets",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "426"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1aa-g06pcLsSipca6u95gGVVr7I/sE0\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 29 Aug 2020 15:34:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"ticket\": {\n        \"isActive\": true,\n        \"bookingTime\": \"2020-08-29T15:31:04.380Z\",\n        \"_id\": \"5f4a7586f886fc54de978f56\",\n        \"movieSchedule\": {\n            \"ticketsBooked\": 7,\n            \"_id\": \"5f4a7454ee6bc354831f2673\",\n            \"movie\": \"5f49ff55413aec25532a309a\",\n            \"startTime\": \"2020-12-16T18:30:00.000Z\",\n            \"endTime\": \"2020-12-19T18:30:00.000Z\",\n            \"__v\": 0\n        },\n        \"user\": {\n            \"_id\": \"5f4a7586f886fc54de978f55\",\n            \"name\": \"Lakshya Khera\",\n            \"phone\": \"1234567890\",\n            \"email\": \"lakshya.khera@gmail.com\",\n            \"__v\": 0\n        },\n        \"__v\": 0\n    }\n}"
+						},
+						{
+							"name": "Throws error if movie slot doesn't exist",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"ticket\" : {\n        \"user\":{\n            \"email\":\"lakshya.khera@gmail.com\"\n        },\n        \"movieSchedule\":\"5f49ff79413aec25532a309c\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/tickets/",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"tickets",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "45"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2d-TOMTVg3IxkeMjUwVZ0gUhoZzLZE\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 29 Aug 2020 15:27:45 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Error: Movie slot doesn't exist\"\n}"
+						}
+					]
 				},
 				{
 					"name": "Get single ticket",
@@ -199,7 +813,118 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Throws error if ticket id doesn't exist",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/tickets/:id",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"tickets",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "5f4938522671ac10fd713f5d"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "34"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"22-HnQQShEqBiJgwUJgqoSVgTv7iQs\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 29 Aug 2020 15:35:35 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Ticket doesn't exist\"\n}"
+						},
+						{
+							"name": "Get single ticket",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/tickets/:id",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"tickets",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "5f4a7586f886fc54de978f56"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "415"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"19f-BGXdBY8HsWIJFrS6i9eDQ4ZUUuI\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 29 Aug 2020 15:36:00 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"isActive\": true,\n    \"bookingTime\": \"2020-08-29T15:31:04.380Z\",\n    \"_id\": \"5f4a7586f886fc54de978f56\",\n    \"movieSchedule\": {\n        \"ticketsBooked\": 7,\n        \"_id\": \"5f4a7454ee6bc354831f2673\",\n        \"movie\": \"5f49ff55413aec25532a309a\",\n        \"startTime\": \"2020-12-16T18:30:00.000Z\",\n        \"endTime\": \"2020-12-19T18:30:00.000Z\",\n        \"__v\": 0\n    },\n    \"user\": {\n        \"_id\": \"5f4a7586f886fc54de978f55\",\n        \"name\": \"Lakshya Khera\",\n        \"phone\": \"1234567890\",\n        \"email\": \"lakshya.khera@gmail.com\",\n        \"__v\": 0\n    },\n    \"__v\": 0\n}"
+						}
+					]
 				},
 				{
 					"name": "Delete single ticket",
@@ -226,9 +951,145 @@
 									"value": "5f4991b52b199621190a9083"
 								}
 							]
-						}
+						},
+						"description": "Deleted ticket corresponding to given ticket id and verifies if ticket id belongs to the provided user id, if yes it will return deleted ticket else throw error."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Throws error if ticket doesn't exist",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/tickets/?id=5f4a027236b39d26d881e20e&user=5f4991b52b199621190a9083",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"tickets",
+										""
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "5f4a027236b39d26d881e20e"
+										},
+										{
+											"key": "user",
+											"value": "5f4991b52b199621190a9083"
+										}
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "34"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"22-HnQQShEqBiJgwUJgqoSVgTv7iQs\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 29 Aug 2020 15:37:18 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Ticket doesn't exist\"\n}"
+						},
+						{
+							"name": "Delete single ticket",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/tickets/?id=5f4a7586f886fc54de978f56&user=5f4a7586f886fc54de978f55",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"tickets",
+										""
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "5f4a7586f886fc54de978f56"
+										},
+										{
+											"key": "user",
+											"value": "5f4a7586f886fc54de978f55"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "187"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"bb-QpXxwsA+hrZnF3AUpwXLPhjeZmU\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 29 Aug 2020 15:38:31 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"ticket\": {\n        \"isActive\": true,\n        \"bookingTime\": \"2020-08-29T15:31:04.380Z\",\n        \"_id\": \"5f4a7586f886fc54de978f56\",\n        \"movieSchedule\": \"5f4a7454ee6bc354831f2673\",\n        \"user\": \"5f4a7586f886fc54de978f55\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
 				},
 				{
 					"name": "Delete all tickets",
@@ -245,9 +1106,60 @@
 								"tickets",
 								"delete-all"
 							]
-						}
+						},
+						"description": "Deletes all tickets and return object with deleteCount displaying number of deleted documents."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Delete all tickets",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/tickets/delete-all",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"tickets",
+										"delete-all"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "18"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"12-HhSQsNEhUeHe5DGEyMudqJ51ZSo\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 29 Aug 2020 15:39:24 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"deletedCount\": 8\n}"
+						}
+					]
 				},
 				{
 					"name": "Get user details",
@@ -273,7 +1185,64 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Throws error if ticket doesn't exist",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/tickets/user/:id",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"tickets",
+										"user",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "5f494b652f7ea41869c94bbb"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "34"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"22-HnQQShEqBiJgwUJgqoSVgTv7iQs\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 29 Aug 2020 15:42:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Ticket doesn't exist\"\n}"
+						}
+					]
 				},
 				{
 					"name": "Update Ticket Timings",
@@ -282,7 +1251,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"user\":\"5f4991b52b199621190a9083\",\n    \"ticket\":\"5f4a026036b39d26d881e20c\",\n    \"movieSchedule\":\"5f4a023536b39d26d881e208\"\n}",
+							"raw": "{\n    \"user\":\"5f4a7586f886fc54de978f55\",\n    \"ticket\":\"5f4a7a5b3a964a5596875267\",\n    \"movieSchedule\":\"5f4a7a7d3a964a5596875268\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -299,9 +1268,127 @@
 								"tickets",
 								"update-timing"
 							]
-						}
+						},
+						"description": "This route, updates ticket timings, and returns new ticket and throws error if new slot doesn't exist or full, or other properties are invalid."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Throws error if ticket doesn't exist",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"user\":\"5f4a7586f886fc54de978f55\",\n    \"ticket\":\"5f4a7a5b3a964a5596875267\",\n    \"movieSchedule\":\"5f4a7a7d3a964a5596875268\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/tickets/update-timing",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"tickets",
+										"update-timing"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "34"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"22-HnQQShEqBiJgwUJgqoSVgTv7iQs\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 29 Aug 2020 15:57:20 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Ticket doesn't exist\"\n}"
+						},
+						{
+							"name": "Update Ticket Timings",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"user\":\"5f4a7586f886fc54de978f55\",\n    \"ticket\":\"5f4a7a5b3a964a5596875267\",\n    \"movieSchedule\":\"5f4a7a7d3a964a5596875268\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/tickets/update-timing",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"tickets",
+										"update-timing"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "426"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1aa-Y4Vq8V16MCUbGkCtb+TjXGp5SFc\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 29 Aug 2020 15:56:07 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"ticket\": {\n        \"isActive\": true,\n        \"bookingTime\": \"2020-08-29T15:42:38.510Z\",\n        \"_id\": \"5f4a7a973a964a559687526a\",\n        \"movieSchedule\": {\n            \"ticketsBooked\": 2,\n            \"_id\": \"5f4a7a7d3a964a5596875268\",\n            \"movie\": \"5f49ff55413aec25532a309a\",\n            \"startTime\": \"2020-12-18T18:30:00.000Z\",\n            \"endTime\": \"2020-12-19T18:30:00.000Z\",\n            \"__v\": 0\n        },\n        \"user\": {\n            \"_id\": \"5f4a7586f886fc54de978f55\",\n            \"name\": \"Lakshya Khera\",\n            \"phone\": \"1234567890\",\n            \"email\": \"lakshya.khera@gmail.com\",\n            \"__v\": 0\n        },\n        \"__v\": 0\n    }\n}"
+						}
+					]
 				},
 				{
 					"name": "Query Tickets within range",
@@ -309,7 +1396,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/tickets/get-tickets?startTime=2020-12-16T18:30:00.000Z&endTime=2020-12-25T18:30:00.000Z",
+							"raw": "localhost:3000/tickets/get-tickets?startTime=2020-12-26T18:30:00.000Z&endTime=2020-12-25T18:30:00.000Z",
 							"host": [
 								"localhost"
 							],
@@ -321,18 +1408,139 @@
 							"query": [
 								{
 									"key": "startTime",
-									"value": "2020-12-16T18:30:00.000Z"
+									"value": "2020-12-26T18:30:00.000Z"
 								},
 								{
 									"key": "endTime",
 									"value": "2020-12-25T18:30:00.000Z"
 								}
 							]
-						}
+						},
+						"description": "Lets user to fetch tickets between given range."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Query Tickets within range",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/tickets/get-tickets?startTime=2020-12-16T18:30:00.000Z&endTime=2020-12-25T18:30:00.000Z",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"tickets",
+										"get-tickets"
+									],
+									"query": [
+										{
+											"key": "startTime",
+											"value": "2020-12-16T18:30:00.000Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2020-12-25T18:30:00.000Z"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "429"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1ad-f1ttxh9jTdlFKSEtWgsrNT7IK5o\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 29 Aug 2020 16:26:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"tickets\": [\n        {\n            \"isActive\": true,\n            \"bookingTime\": \"2020-08-29T15:42:38.510Z\",\n            \"_id\": \"5f4a7a973a964a559687526a\",\n            \"movieSchedule\": {\n                \"ticketsBooked\": 2,\n                \"_id\": \"5f4a7a7d3a964a5596875268\",\n                \"movie\": \"5f49ff55413aec25532a309a\",\n                \"startTime\": \"2020-12-18T18:30:00.000Z\",\n                \"endTime\": \"2020-12-19T18:30:00.000Z\",\n                \"__v\": 0\n            },\n            \"user\": {\n                \"_id\": \"5f4a7586f886fc54de978f55\",\n                \"name\": \"Lakshya Khera\",\n                \"phone\": \"1234567890\",\n                \"email\": \"lakshya.khera@gmail.com\",\n                \"__v\": 0\n            },\n            \"__v\": 0\n        }\n    ]\n}"
+						},
+						{
+							"name": "Throws error if range is invalid or incomplete",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/tickets/get-tickets?startTime=2020-12-26T18:30:00.000Z&endTime=2020-12-25T18:30:00.000Z",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"tickets",
+										"get-tickets"
+									],
+									"query": [
+										{
+											"key": "startTime",
+											"value": "2020-12-26T18:30:00.000Z"
+										},
+										{
+											"key": "endTime",
+											"value": "2020-12-25T18:30:00.000Z"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "37"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"25-xC/rt6YKNY8SxIz/fBW+z538w9o\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 29 Aug 2020 16:26:57 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Fill the range properly\"\n}"
+						}
+					]
 				}
 			],
+			"description": "Tickets are entity booked by the user to book a seat for a particular movie slot.\n\nThe following routes describe the gateway routes for this entity.",
 			"protocolProfileBehavior": {}
 		},
 		{
@@ -353,7 +1561,8 @@
 								"movies",
 								""
 							]
-						}
+						},
+						"description": "This fetches all movies from the collections."
 					},
 					"response": []
 				},
@@ -403,7 +1612,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "5f48faf1072a04f45942fca1"
+									"value": "5f49ff55413aec25532a309a"
 								}
 							]
 						}
@@ -455,6 +1664,7 @@
 					"response": []
 				}
 			],
+			"description": "The following routes describe the gateway routes for this entity.",
 			"protocolProfileBehavior": {}
 		},
 		{
@@ -475,9 +1685,60 @@
 								"movie-schedules",
 								""
 							]
-						}
+						},
+						"description": "Fetches all movie schedules/slots."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Get All Movie Schedule",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/movie-schedules/",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"movie-schedules",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "438"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1b6-cQtmXjvias5rF4HCIZ2HQpgFp90\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 29 Aug 2020 16:27:51 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"movieSchedules\": [\n        {\n            \"ticketsBooked\": 7,\n            \"_id\": \"5f4a7454ee6bc354831f2673\",\n            \"movie\": {\n                \"_id\": \"5f49ff55413aec25532a309a\",\n                \"name\": \"Dark knight\",\n                \"__v\": 0\n            },\n            \"startTime\": \"2020-12-16T18:30:00.000Z\",\n            \"endTime\": \"2020-12-19T18:30:00.000Z\",\n            \"__v\": 0\n        },\n        {\n            \"ticketsBooked\": 2,\n            \"_id\": \"5f4a7a7d3a964a5596875268\",\n            \"movie\": {\n                \"_id\": \"5f49ff55413aec25532a309a\",\n                \"name\": \"Dark knight\",\n                \"__v\": 0\n            },\n            \"startTime\": \"2020-12-18T18:30:00.000Z\",\n            \"endTime\": \"2020-12-19T18:30:00.000Z\",\n            \"__v\": 0\n        }\n    ]\n}"
+						}
+					]
 				},
 				{
 					"name": "Add single movie schedule",
@@ -503,9 +1764,127 @@
 								"movie-schedules",
 								""
 							]
-						}
+						},
+						"description": "Adds movie schedule if movie exists and set tickets booked to zero."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Add single movie schedule",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"movieSchedule\": {\n        \"movie\":\"5f49ff55413aec25532a309a\",\n        \"startTime\":\"2020-12-16T18:30:00.000Z\",\n        \"endTime\":\"2020-12-19T18:30:00.000Z\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/movie-schedules/",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"movie-schedules",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "226"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"e2-a2XafRWaiSK7tj2+fnc7FaRPrBE\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 29 Aug 2020 16:28:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"movieSchedule\": {\n        \"ticketsBooked\": 0,\n        \"_id\": \"5f4a82200671d7561c8c43e1\",\n        \"movie\": {\n            \"_id\": \"5f49ff55413aec25532a309a\",\n            \"name\": \"Dark knight\",\n            \"__v\": 0\n        },\n        \"startTime\": \"2020-12-16T18:30:00.000Z\",\n        \"endTime\": \"2020-12-19T18:30:00.000Z\",\n        \"__v\": 0\n    }\n}"
+						},
+						{
+							"name": "Throws error if movie doesn't exist.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"movieSchedule\": {\n        \"movie\":\"5f49ff55413aec25532a309b\",\n        \"startTime\":\"2020-12-16T18:30:00.000Z\",\n        \"endTime\":\"2020-12-19T18:30:00.000Z\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:3000/movie-schedules/",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"movie-schedules",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "29"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1d-RRryy+8ujCEKJlpjmZ9Mt2icZuk\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 29 Aug 2020 16:29:02 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Movie not found\"\n}"
+						}
+					]
 				},
 				{
 					"name": "Get single movie schedule",
@@ -528,9 +1907,66 @@
 									"value": "5f491cfeddad4b0608732075"
 								}
 							]
-						}
+						},
+						"description": "Fetchs movie schedule document using provided id."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Get single movie schedule",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/movie-schedules/:id",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"movie-schedules",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "5f4a7454ee6bc354831f2673"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "208"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"d0-OhzURb2jKIb1Qr5lHwXQZ+IJUzU\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 29 Aug 2020 16:29:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"ticketsBooked\": 7,\n    \"_id\": \"5f4a7454ee6bc354831f2673\",\n    \"movie\": {\n        \"_id\": \"5f49ff55413aec25532a309a\",\n        \"name\": \"Dark knight\",\n        \"__v\": 0\n    },\n    \"startTime\": \"2020-12-16T18:30:00.000Z\",\n    \"endTime\": \"2020-12-19T18:30:00.000Z\",\n    \"__v\": 0\n}"
+						}
+					]
 				},
 				{
 					"name": "Delete single movie schedule",
@@ -538,7 +1974,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/movie-schedules/?id=5f4a023536b39d26d881e208",
+							"raw": "localhost:3000/movie-schedules/?id=5f4a7454ee6bc354831f2673",
 							"host": [
 								"localhost"
 							],
@@ -550,12 +1986,69 @@
 							"query": [
 								{
 									"key": "id",
-									"value": "5f4a023536b39d26d881e208"
+									"value": "5f4a7454ee6bc354831f2673"
 								}
 							]
-						}
+						},
+						"description": "Delete movie slot if id is present and returns the document else error."
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Delete single movie schedule",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "localhost:3000/movie-schedules/?id=5f4a7454ee6bc354831f2673",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"movie-schedules",
+										""
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "5f4a7454ee6bc354831f2673"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "189"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"bd-7p4lxt/6jcE3xQ0UQ36cw9dLaVo\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 29 Aug 2020 16:30:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"movieSchedule\": {\n        \"ticketsBooked\": 7,\n        \"_id\": \"5f4a7454ee6bc354831f2673\",\n        \"movie\": \"5f49ff55413aec25532a309a\",\n        \"startTime\": \"2020-12-16T18:30:00.000Z\",\n        \"endTime\": \"2020-12-19T18:30:00.000Z\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
 				},
 				{
 					"name": "Delete all movies schedule",
@@ -572,11 +2065,13 @@
 								"movie-schedules",
 								"delete-all"
 							]
-						}
+						},
+						"description": "Deletes all movie slot and return object containing number of deleted documents."
 					},
 					"response": []
 				}
 			],
+			"description": "Movie schedule describes the time slot for the movie, it also holds the number of ticket books in the following slot.\nThe maximum value for tickets booked can be 20.\n\nThe following routes describe the gateway routes for this entity.",
 			"protocolProfileBehavior": {}
 		},
 		{
@@ -593,7 +2088,8 @@
 					"path": [
 						"health"
 					]
-				}
+				},
+				"description": "A health check route to make sure if the API is working or not."
 			},
 			"response": []
 		}
@@ -622,7 +2118,7 @@
 	],
 	"variable": [
 		{
-			"id": "32d8c8d4-0dc6-4f92-87cc-e1e5f78b18b3",
+			"id": "52e62b80-a24c-4ca8-96f5-f278b3f6b1b7",
 			"key": "api",
 			"value": "localhost:3000"
 		}
