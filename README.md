@@ -65,6 +65,12 @@ Idea was to build to scalable and module backend infrastructure which follows SO
 
 Each entity is considered as a module and build in a such way that it can wire up with other modules easily.
 
+### Requirements Flow
+
+<img src="./readme_assets/requirements_flow.png" height="200">
+
+
+
 ### Database Design
 
-<img src="./readme_assets/database_design.png" height="100">
+<img src="./readme_assets/database_design.png" height="200">
