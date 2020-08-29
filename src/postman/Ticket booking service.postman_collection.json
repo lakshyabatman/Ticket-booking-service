@@ -155,7 +155,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"ticket\" : {\n        \"user\":\"5f49384b2671ac10fd713f5c\",\n        \"movieSchedule\":\"5f49219d1a4c1507b48fc1c7\"\n    }\n}",
+							"raw": "{\n    \"ticket\" : {\n        \"user\":{\n            \"email\":\"lakshya.khera@gmail.com\"\n        },\n        \"movieSchedule\":\"5f49ff79413aec25532a309c\"\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -232,14 +232,97 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/users/delete-all",
+							"raw": "localhost:3000/tickets/delete-all",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"users",
+								"tickets",
 								"delete-all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get user details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/tickets/user/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tickets",
+								"user",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5f494b652f7ea41869c94bbb"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Ticket Timings",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user\":\"5f4991b52b199621190a9083\",\n    \"ticket\":\"5f4a026036b39d26d881e20c\",\n    \"movieSchedule\":\"5f4a023536b39d26d881e208\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:3000/tickets/update-timing",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tickets",
+								"update-timing"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Query Tickets within range",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/tickets/get-tickets?startTime=2020-12-16T18:30:00.000Z&endTime=2020-12-25T18:30:00.000Z",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"tickets",
+								"get-tickets"
+							],
+							"query": [
+								{
+									"key": "startTime",
+									"value": "2020-12-16T18:30:00.000Z"
+								},
+								{
+									"key": "endTime",
+									"value": "2020-12-25T18:30:00.000Z"
+								}
 							]
 						}
 					},
@@ -399,7 +482,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"movieSchedule\": {\n        \"movie\":\"5f491eaaddd79f0670cf42ce\",\n        \"startTime\":\"123456789\",\n        \"endTime\":\"1234567890\"\n    }\n}",
+							"raw": "{\n    \"movieSchedule\": {\n        \"movie\":\"5f49ff55413aec25532a309a\",\n        \"startTime\":\"2020-12-16T18:30:00.000Z\",\n        \"endTime\":\"2020-12-19T18:30:00.000Z\"\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -535,7 +618,7 @@
 	],
 	"variable": [
 		{
-			"id": "32eb03da-37e6-44c3-b93d-64177aee5806",
+			"id": "23222e65-5cdf-42a2-952d-9bd8465bcf4b",
 			"key": "api",
 			"value": "localhost:3000"
 		}
