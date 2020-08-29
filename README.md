@@ -29,6 +29,13 @@ To create a REST application for movie ticket bookings.
 - To start server, write on your terminal `npm start` or `npm run dev`.
 - This will run server on post `3000`.
 
+## Testing
+Test suites for basic functionality are added in repository layer as it contains most of the logic,to run test suites.
+
+- Write `npm run test`.
+
+**For manual testing, postman collection has been added in postman folder in root directory.**
+
 ## Database design
 ### User
 | Email | Phone Number  |  User_id |
