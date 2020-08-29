@@ -9,6 +9,7 @@ const { ticketController } = require('./modules/ticket');
 const cronTasks = require('./modules/shared/cron-job')
 const setupWorkers = require('./modules/shared/cluster');
 const cluster = require('cluster');
+const apiLimiter = require('./modules/shared/rate-limit');
 
 
 const setupApp = () => {
@@ -25,7 +26,7 @@ const setupApp = () => {
   
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({extended:false}))
-  
+  app.use(apiLimiter);
   //Cron Job
   cronTasks();
   
