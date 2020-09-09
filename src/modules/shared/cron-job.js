@@ -7,7 +7,6 @@ let cleanUpTicketsCron = cron.schedule("*/30 * * * *" , function() {
   let currentTime = new Date().toISOString()
    console.log(`${currentTime}`)
   ticketService.expireOldTickets()
-  //TODO  Add a service method which deletes tickets if there is difference of 8 hours 
   // Todo Might need to update movieschedule of that ticket
 },false)
 
