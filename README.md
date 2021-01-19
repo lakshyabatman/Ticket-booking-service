@@ -20,6 +20,10 @@ To create a REST application for movie ticket bookings.
  - Caching : Redis
  - Database: MongoDB
 
+---
+**To look over personal enchancements please checkout to personal branch :D.**
+
+---
 ## Installation
 - Make sure you have docker installed on your machine.
 - Run `docker-compose up ` from root directory of application to start up redis server. (Please: Don't close this terminal instance).
