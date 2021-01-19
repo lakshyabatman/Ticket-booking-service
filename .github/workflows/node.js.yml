@@ -31,4 +31,4 @@ jobs:
     - name: Check docker images status
       run: docker ps -a
     - run: npm ci
-    - run: npm run start --if-present
+    - run: npm run test
