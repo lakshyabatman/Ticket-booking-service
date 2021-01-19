@@ -1,7 +1,5 @@
 # Ticket Booking Service
 
-This application is part of hiring assignment by Zomentum.
-
 ## Task
 To create a REST application for movie ticket bookings.
 ### User side Requirements

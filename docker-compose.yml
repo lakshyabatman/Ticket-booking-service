@@ -8,6 +8,17 @@ services:
       - ticketbook
     ports:
       - '6379:6379'
+  mongodb:
+    image: mongo
+    container_name: database
+    hostname: mongodb
+    volumes:
+      - ./.docker/mongodb/mongod.conf:/etc/mongod.conf
+      - ./.docker/mongodb/initdb.d/:/docker-entrypoint-initdb.d/
+      - ./.docker/mongodb/data/db/:/data/db/
+      - ./.docker/mongodb/data/log/:/var/log/mongodb/
+    ports: 
+      - "30000:27017"
 
 networks:
   ticketbook:
