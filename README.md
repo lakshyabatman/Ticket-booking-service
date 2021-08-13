@@ -66,6 +66,9 @@ Test suites for basic functionality are added in repository layer as it contains
 |--|--|--|
 | Primary key | Ref to User | Ref to Movie Schedule| 
 
+### Code structure
+The code follows design pattern known as <a href="https://medium.com/@pererikbergman/repository-design-pattern-e28c0f3e4a30" target="_blank">Repository design pattern </a>.
+Each entity has been divided into module and each module has three layers of abstraction from controllers to repository, making them reusable.
 
 
 ## Initial Brainstorming 
