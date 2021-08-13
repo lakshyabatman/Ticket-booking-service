@@ -3,7 +3,8 @@ const userService = require('../provider');
 const HTTPStatusCode = require('../../shared/httpcode');
 const router = express.Router();
 const cache = require('../../shared/redis')
-
+const jwt = require('jsonwebtoken');
+const { authenticate } = require('../../../middlewares/auth');
 
 /**
  * 
@@ -41,7 +42,8 @@ router.post('',async (req,res) => {
   try {
     if(req.body.user == undefined) throw new Error('Body should have user object')
     let user = await userService.addOne(req.body.user);
-    return res.json({user});
+    let token = jwt.sign({id: user.id}, process.env['JWT_SECRET'])
+    return res.json({user,token});
   } catch (err) {
     return res.status(HTTPStatusCode.BAD_REQUEST).json({
       message: err.message
@@ -50,7 +52,7 @@ router.post('',async (req,res) => {
 })
 
 
-router.delete('', async (req,res) => {
+router.delete('',authenticate, async (req,res) => {
   if(req.query.id == undefined)  return res.status(HTTPStatusCode.BAD_REQUEST).json({
     message: 'User Id should be provided'
   })

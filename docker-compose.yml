@@ -3,14 +3,12 @@ version: "3.2"
 services: 
   redis:
     image: redis
-    container_name: distributed-cache
-    networks:
-      - ticketbook
+    container_name: cache
     ports:
       - '6379:6379'
   mongodb:
     image: mongo
-    container_name: database
+    container_name: db
     hostname: mongodb
     volumes:
       - ./.docker/mongodb/mongod.conf:/etc/mongod.conf
@@ -19,7 +17,3 @@ services:
       - ./.docker/mongodb/data/log/:/var/log/mongodb/
     ports: 
       - "30000:27017"
-
-networks:
-  ticketbook:
-    driver: bridge
