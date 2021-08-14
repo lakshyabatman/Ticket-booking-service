@@ -15,9 +15,13 @@ class UserRepository {
    * @param {string} userID 
    * @returns Document of user type
    */
-  async getOne(userID) {
+  async getById(userID) {
     if(!ObjectId.isValid(userID)) throw new Error('User Id is invalid')
-    return await User.findById(userID);
+    let user = await User.findById(userID)
+    if(!user) throw new Error("User not found");
+    
+    const {password, ...res}  = user.toObject()
+    return res;
   }
 
   /**
@@ -26,7 +30,10 @@ class UserRepository {
    * @returns document of user type
    */
   async getUserDetails(userDto) {
-    return (await User.find({...userDto}))[0];
+    let user = await User.findOne({...userDto});
+    if(!user) throw new Error("User not found");
+    delete user['password'];
+    return user;
   }
 
   /**
@@ -34,7 +41,7 @@ class UserRepository {
    * @returns Array of user document
    */
   async getAll() {
-    return await User.find();
+    return (await User.find()).map(user => user.toObject());
   }
 
   /**
@@ -43,7 +50,9 @@ class UserRepository {
    * @returns document of user type
    */
   async addOne(userDto) {
-    return await User.create(userDto);
+    let res = await User.create(userDto);
+    const { password, ...user} = res.toObject();
+    return user
   }
 
   /**
@@ -62,6 +71,7 @@ class UserRepository {
   async deleteAll() {
     return await User.deleteMany({});
   }
+
 
 }
 

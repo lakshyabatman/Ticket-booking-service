@@ -37,11 +37,14 @@ router.get('/',cache.route(), async (req,res) => {
   }
 })
 
-
+//Register
 router.post('',async (req,res) => {
   try {
     if(req.body.user == undefined) throw new Error('Body should have user object')
-    let user = await userService.addOne(req.body.user);
+    let  newUser = req.body.user
+    if(!newUser || !newUser.email || !newUser.password || !newUser.name ) throw new Error("Missing fields")
+
+    let user = await userService.addOne(newUser);
     let token = jwt.sign({id: user.id}, process.env['JWT_SECRET'])
     return res.json({user,token});
   } catch (err) {
@@ -50,6 +53,25 @@ router.post('',async (req,res) => {
     })
   }
 })
+
+//Login
+router.post('/login', async (req, res) => {
+  try {
+    let userPayload = req.body.user;
+    if(!userPayload || !userPayload.email || !userPayload.password) throw new Error("User field is missing")
+    let user = userService.verifyPassword(userPayload);
+    if(res) {
+      let token = jwt.sign({id: user.id}, process.env['JWT_SECRET'])
+      return res.json({token})
+    }else {
+      return res.status(HTTPStatusCode.NOT_AUTHORISED).json({message: 'Invalid password'})
+    }
+  }catch(err) {
+    return res.status(HTTPStatusCode.BAD_REQUEST).json({
+      message: err.message
+    })
+  }
+})  
 
 
 router.delete('',authenticate, async (req,res) => {

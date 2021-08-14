@@ -12,7 +12,8 @@ describe('--- User Repository ---', () => {
     name: faker.name.findName(),
     email: faker.internet.email(),
     id: faker.random.uuid(),
-    phone: '0123456789'
+    phone: '0123456789',
+    password: faker.random.alphaNumeric(20s)
   }
 
 

@@ -18,10 +18,15 @@ let userSchema = new Schema({
   name: {
     type: String,
     required: 'Name is required'
+  },
+  password: {
+    type: String,
+    required: 'Password is required',
+    minlength:10,
   }
 })
 
-
+9696914049
 userSchema.path('email').validate((email) => {
   var emailRegex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
   return emailRegex.test(email);

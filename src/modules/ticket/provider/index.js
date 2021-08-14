@@ -98,7 +98,7 @@ class TicketService {
   async getUserDetails(ticketID) {
     let ticket = await this.TicketRepository.getOne(ticketID)
     if(!ticket) throw new Error("Ticket doesn't exist")
-    ticket.populate('user').execPopulate().user
+    return ticket.user
   }
 
   async expireOldTickets() {
