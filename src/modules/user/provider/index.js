@@ -1,5 +1,6 @@
 const UserRepository = require('../repository');
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcryptjs');
+const { roles } = require('../../role/model');
 
 /**
  * @description Provider class which wires up repository layer wtih controller layer.
@@ -23,12 +24,12 @@ class UserService {
   async addOne(userDto) {
     let salt = bcrypt.genSaltSync(10);
     userDto.password =  bcrypt.hashSync(userDto.password, salt);
-    let user = await this.UserRepository.addOne(userDto)
+    let user = await this.UserRepository.addOne({...userDto, role: roles.User})
     return user;
   }
 
   async verifyPassword(userDto) {
-    let user = await this.UserRepository.getOne({email: userDto.email});
+    let user = await this.UserRepository.getUserDetails({email: userDto.email});
     if(!user) throw new Error("User not found")
     let res = bcrypt.compareSync(userDto.password, user.password);
     return res? user : null;

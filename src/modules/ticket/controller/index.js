@@ -4,6 +4,8 @@ const HTTPStatusCode = require('../../shared/httpcode');
 const router = express.Router();
 const cache = require('../../shared/redis');
 const { authenticate } = require('../../../middlewares/auth');
+const { AuthenicatedWrite } = require('../../../middlewares/roleBaseAuth');
+const { Entity } = require('../../shared/enums');
 
 
 /**
@@ -12,7 +14,16 @@ const { authenticate } = require('../../../middlewares/auth');
  * 
  */
 
-router.get('/get-tickets',authenticate ,cache.route() ,async (req,res) => {
+ router.post('/update-timing', async (req,res) => {
+  try {
+    let newTicket = await ticketService.updateTiming(req.body.user,req.body.ticket,req.body.movieSchedule);
+    return res.json({ticket: newTicket})
+  }catch(err) {
+    return res.status(HTTPStatusCode.BAD_REQUEST).json({message: err.message})
+  }
+})
+
+router.get('/get-tickets' ,cache.route() ,async (req,res) => {
   try {
     if(req.query.startTime == undefined || req.query.endTime == undefined || req.query.startTime >req.query.endTime) throw new Error("Fill the range properly")
     let payload = await ticketService.getAllBetweenRange(req.query.startTime,req.query.endTime);
@@ -22,7 +33,10 @@ router.get('/get-tickets',authenticate ,cache.route() ,async (req,res) => {
   }
 })
 
-router.get('/',authenticate,cache.route(), async (req,res) => {
+router.use(AuthenicatedWrite(Entity.TicketEntity))
+
+
+router.get('/',cache.route(), async (req,res) => {
   try {
     let tickets =  await ticketService.getAll();
     return res.json({tickets});
@@ -33,7 +47,7 @@ router.get('/',authenticate,cache.route(), async (req,res) => {
   }
 })
 
-router.get('/:id',authenticate,cache.route(), async (req,res) => {
+router.get('/:id',cache.route(), async (req,res) => {
   if(req.params.id == undefined) return res.status(HTTPStatusCode.BAD_REQUEST).json({
     message: 'Ticket Id should be provided'
   })
@@ -48,7 +62,7 @@ router.get('/:id',authenticate,cache.route(), async (req,res) => {
 })
 
 
-router.post('',authenticate,async (req,res) => {
+router.post('',async (req,res) => {
   try {
     if(req.body.ticket == undefined) throw new Error('Body should have ticket object')
     let ticket = await ticketService.addOne(req.body.ticket.user, req.body.ticket.movieSchedule);
@@ -112,14 +126,7 @@ router.get('/user/:id',cache.route(), async (req,res) => {
 
 
 
-router.post('/update-timing', async (req,res) => {
-  try {
-    let newTicket = await ticketService.updateTiming(req.body.user,req.body.ticket,req.body.movieSchedule);
-    return res.json({ticket: newTicket})
-  }catch(err) {
-    return res.status(HTTPStatusCode.BAD_REQUEST).json({message: err.message})
-  }
-})
+
 
 
 module.exports = router;

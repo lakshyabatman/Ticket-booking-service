@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { roles } = require('../../role/model');
 const Schema = mongoose.Schema;
 
 
@@ -23,10 +24,13 @@ let userSchema = new Schema({
     type: String,
     required: 'Password is required',
     minlength:10,
+  },
+  role : {
+    type: roles,
+    required: true
   }
 })
 
-9696914049
 userSchema.path('email').validate((email) => {
   var emailRegex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
   return emailRegex.test(email);

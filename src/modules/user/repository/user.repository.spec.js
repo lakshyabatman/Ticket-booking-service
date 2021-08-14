@@ -5,6 +5,7 @@ const faker = require("faker");
 const {User}  = require('../model');
 const UserRepository = require('./index');
 var ObjectID = require('mongodb').ObjectID;
+const { roles } = require("../../role/model");
 
 
 describe('--- User Repository ---', () => {
@@ -13,7 +14,8 @@ describe('--- User Repository ---', () => {
     email: faker.internet.email(),
     id: faker.random.uuid(),
     phone: '0123456789',
-    password: faker.random.alphaNumeric(20s)
+    password: faker.random.alphaNumeric(20),
+    role: roles.User
   }
 
 

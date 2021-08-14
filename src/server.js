@@ -7,7 +7,8 @@ const { movieController } = require('./modules/movie');
 const { movieScheduleController } = require('./modules/movie-schedule');
 const { ticketController } = require('./modules/ticket');
 const cluster = require('cluster');
-const {apiLimiter,cronTasks,setupWorkers} = require('./modules/shared')
+const {apiLimiter,cronTasks,setupWorkers} = require('./modules/shared');
+const { authenticate } = require('./middlewares/auth');
 const setupApp = () => {
 
   mongoose.connect(process.env.DB_URL, {useNewUrlParser:true,useUnifiedTopology:true}).then(() => {
@@ -36,6 +37,7 @@ const setupApp = () => {
   
   // Child routes
   app.use('/users',userController);
+  app.use(authenticate)
   app.use('/movies',movieController)
   app.use('/movie-schedules',movieScheduleController);
   app.use('/tickets', ticketController );

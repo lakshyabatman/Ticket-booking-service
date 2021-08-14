@@ -2,7 +2,9 @@ const express = require('express');
 const movieService = require('../provider');
 const HTTPStatusCode = require('../../shared/httpcode');
 const router = express.Router();
-const cache = require('../../shared/redis')
+const cache = require('../../shared/redis');
+const { Entity } = require('../../shared/enums');
+const { AuthenicatedWrite } = require('../../../middlewares/roleBaseAuth');
 
 
 
@@ -37,7 +39,7 @@ router.get('/',cache.route(), async (req,res) => {
   }
 })
 
-
+router.use(AuthenicatedWrite(Entity.MovieEntity))
 router.post('',async (req,res) => {
   try {
     if(req.body.movie == undefined) throw new Error('Body should have movie object')

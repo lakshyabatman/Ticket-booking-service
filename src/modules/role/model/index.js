@@ -1,3 +1,4 @@
+const {Entity} = require('../../shared/enums')
 const Role = {
     Admin: 'admin',
     User: 'user'
@@ -15,17 +16,17 @@ const Scope = {
 
 
 const QueryContext = {
-    [Role.Admin] : {
-        'movie': {permissions: [Permission.Read, Permission.Write], scope: Scope.All},
-        'movie-schedule': {permissions: [Permission.Write,Permission.Read], scope: Scope.All},
-        'user': {permissions: [Permission.Read, Permission.Write], scope: Scope.All},
-        'ticket':{permissions: [Permission.Read, Permission.Write], scope: Scope.All}
+    'admin': {
+        [Entity.MovieEntity]: {permissions: [Permission.Read, Permission.Write], scope: Scope.All},
+        [Entity.MovieScheduleEntity]: {permissions: [Permission.Write,Permission.Read], scope: Scope.All},
+        [Entity.UserEntity]: {permissions: [Permission.Read, Permission.Write], scope: Scope.All},
+        [Entity.TicketEntity]:{permissions: [Permission.Read, Permission.Write], scope: Scope.All}
     },
-    [Role.User]: {
-        'movie': {permissions: [Permission.Read], scope: Scope.All},
-        'movie-schedule': {permissions: [Permission.Read], scope: Scope.All},
-        'user': {permissions: [Permission.Read, Permission.Write], scope: Scope.Self},
-        'ticket':{permissions: [Permission.Read, Permission.Write], scope: Scope.Self}
+    'user': {
+        [Entity.MovieEntity]: {permissions: [Permission.Read], scope: Scope.All},
+        [Entity.MovieScheduleEntity]: {permissions: [Permission.Read], scope: Scope.All},
+        [Entity.UserEntity]: {permissions: [Permission.Read, Permission.Write], scope: Scope.Self},
+        [Entity.TicketEntity]:{permissions: [Permission.Read, Permission.Write], scope: Scope.Self}
     }
 }
 
