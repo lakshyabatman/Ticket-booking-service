@@ -3,11 +3,12 @@
 ## Task
 To create a REST application for movie ticket bookings.
 ### User side Requirements
-- As a user, I can book ticket for a movie at a given time slot if available.
+- As a user/admin, I can book ticket for a movie at a given time slot if available.
 - As a user, I can update booking timings if possible.
-- As a user, I can fetch user details via ticket id.
-- As a user, I can delete ticket if possible.
-- As a user, I can retrieve all tickets at a given time.
+- As a admin, I can fetch user details via ticket id.
+- As a admin, I can delete ticket if possible.
+- As a admin, I can retrieve all tickets at a given time.
+- As a user/admin, I can login and register.
 
 ### Application side requirements
 
@@ -75,9 +76,13 @@ Each entity has been divided into module and each module has three layers of abs
 
 Idea was to build to scalable and module backend infrastructure which follows SOLID design patterns, also making sure database should be as normalised as possible.
 
+### New Features
+- Added JWT authenication with <a href="https://en.wikipedia.org/wiki/Role-based_access_control" target="_blank"> Role based access comtrol</a>.
+
 ### Application architecture
 
 Each entity is considered as a module and build in a such way that it can wire up with other modules easily.
+Roles are assigned to each user and based on roles permissions and scopes are allocated for entities.
 
 ### Requirements Flow
 

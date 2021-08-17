@@ -16,13 +16,13 @@ const Scope = {
 
 
 const QueryContext = {
-    'admin': {
+    [Role.Admin]: {
         [Entity.MovieEntity]: {permissions: [Permission.Read, Permission.Write], scope: Scope.All},
         [Entity.MovieScheduleEntity]: {permissions: [Permission.Write,Permission.Read], scope: Scope.All},
         [Entity.UserEntity]: {permissions: [Permission.Read, Permission.Write], scope: Scope.All},
         [Entity.TicketEntity]:{permissions: [Permission.Read, Permission.Write], scope: Scope.All}
     },
-    'user': {
+    [Role.User]: {
         [Entity.MovieEntity]: {permissions: [Permission.Read], scope: Scope.All},
         [Entity.MovieScheduleEntity]: {permissions: [Permission.Read], scope: Scope.All},
         [Entity.UserEntity]: {permissions: [Permission.Read, Permission.Write], scope: Scope.Self},
